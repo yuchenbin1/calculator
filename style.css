@@ -1,0 +1,100 @@
+*{
+			margin: 0;
+			padding: 0;
+			font-size: 40px;
+		}
+		
+		#outer{
+			width:400px;
+			height:500px;
+			background-color: #36292f;
+			margin:auto;
+			margin-top:100px;
+			border-radius: 5px;
+			color:#000000;
+			overflow: hidden;
+		}
+		#show{
+			width:380px;
+			height: 220px;
+			margin:auto;
+			overflow: hidden;
+		}
+		
+		#show .formula{
+			width:380px;
+			height:100px;
+			background-color: #e2e1e4;
+			transform: translateY(15px);
+			border-radius: 10px;
+			overflow: hidden;
+			text-align: right;
+		}
+		
+		#show .inAndOut{
+			display:flex;
+			justify-content: space-between;
+		}
+		
+		#show .inAndOut .result{
+			width:187px;
+			height: 90px;
+			background-color: #d8e3e7;
+			border-radius: 10px;
+			margin-top:20px;
+			overflow: hidden;
+		}
+		
+		#show .inAndOut .input{
+			width:187px;
+			height: 90px;
+			background-color: #ccccd6;
+			margin-top:20px;
+			border-radius: 10px;
+			overflow: hidden;
+			text-align: right;
+		}
+		
+		/* 以下按键区域 */
+		
+		#key{
+			width:380px;
+			height:270px;
+			background-color: #0eb0c9;
+			margin:auto;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		.numberKey{
+			width:230px;
+			height:270px;
+			background-color: #1ba784;
+		}
+		
+		.functionKey{
+			width:140px;
+			height: 270px;
+		}
+		
+		
+		
+		.numberKey button{
+			border-radius: 10px;
+			width:60px;
+			height:50px;
+			margin:15px 0 0 6px;
+			outline: none;
+		}
+		.functionKey button{
+			border-radius: 10px;
+			width:60px;
+			height:50px;
+			margin:15px 4px 0 0;
+			outline: none;
+		}
+		
+
+		#btnCal{
+			width:135px;
+		}
