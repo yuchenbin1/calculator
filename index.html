@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			font-size: 40px;
+		}
+		
+		#outer{
+			width:400px;
+			height:500px;
+			background-color: #36292f;
+			margin:auto;
+			margin-top:100px;
+			border-radius: 5px;
+			color:#000000;
+			overflow: hidden;
+		}
+		#show{
+			width:380px;
+			height: 220px;
+			margin:auto;
+			overflow: hidden;
+		}
+		
+		#show .formula{
+			width:380px;
+			height:100px;
+			background-color: #e2e1e4;
+			transform: translateY(15px);
+			border-radius: 10px;
+			overflow: hidden;
+			text-align: right;
+		}
+		
+		#show .inAndOut{
+			display:flex;
+			justify-content: space-between;
+		}
+		
+		#show .inAndOut .result{
+			width:187px;
+			height: 90px;
+			background-color: #d8e3e7;
+			border-radius: 10px;
+			margin-top:20px;
+			overflow: hidden;
+		}
+		
+		#show .inAndOut .input{
+			width:187px;
+			height: 90px;
+			background-color: #ccccd6;
+			margin-top:20px;
+			border-radius: 10px;
+			overflow: hidden;
+			text-align: right;
+		}
+		
+		/* 以下按键区域 */
+		
+		#key{
+			width:380px;
+			height:270px;
+			background-color: #0eb0c9;
+			margin:auto;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		.numberKey{
+			width:230px;
+			height:270px;
+			background-color: #1ba784;
+		}
+		
+		.functionKey{
+			width:140px;
+			height: 270px;
+		}
+		
+		
+		
+		.numberKey button{
+			border-radius: 10px;
+			width:60px;
+			height:50px;
+			margin:15px 0 0 6px;
+			outline: none;
+		}
+		.functionKey button{
+			border-radius: 10px;
+			width:60px;
+			height:50px;
+			margin:15px 4px 0 0;
+			outline: none;
+		}
+		
+
+		#btnCal{
+			width:135px;
+		}
+		
+		
+	</style>
+	<body>
+		<div id="outer">
+			<div id="show">
+				<div class='formula'>
+					<span v-text="mainShow"></span>
+				</div>
+				<div class="inAndOut">
+					<div class='result'>
+						<span v-text="result"></span>
+					</div>
+					<div class='input' >
+						<span v-text="inputMsg"></span>
+					</div>
+				</div>
+			</div>
+			<div id='key'>
+				<div class="numberKey">
+					<button id="num7" @click="showNum7"><svg t="1585386951167" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="870" width="20" height="20"><path d="M771.5 130.6C577 432.5 479.8 703.8 479.8 944.6h-60.3c0-112.4 24.9-238.2 74.8-377.4s122.3-284 217.2-434.6h-469v-55h529v53z" p-id="871" fill="#2c2c2c"></path></svg></button>
+					<button id="num8" @click="showNum8"><svg t="1585386981427" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1440" width="20" height="20"><path d="M764.5 705.1c0 80.1-22.6 142.2-67.7 186.3s-108.9 66.2-191.4 66.2c-82.1 0-146.1-21.9-192-65.6-46-43.7-68.9-105.6-68.9-185.7 0-56.3 15.2-104.1 45.7-143.5 30.5-39.4 69.2-63.2 116.3-71.4V489c-44.6-11.9-79.6-36.8-105-74.8-25.4-38-38-82.6-38-134 0-64.5 21.7-116.5 65-156.1s101.3-59.4 174-59.4c75.1 0 134.3 19.8 177.4 59.4s64.7 92.1 64.7 157.3c0 53.8-13.2 99.2-39.5 136.1s-61.5 59.9-105.5 69v2.5c51.7 10.3 92.1 34.7 121.3 73.3s43.6 86.2 43.6 142.8z m-60-5.9c0-59.2-17.6-104.9-52.8-137.2-35.2-32.3-84.6-48.4-148.1-48.4-61.9 0-110.5 16.9-145.9 50.6-35.4 33.7-53.1 79.5-53.1 137.5 0 66.6 17 117.6 51 152.9s84.4 53 151.2 53c63.9 0 112.8-16.8 146.8-50.6 33.9-33.6 50.9-86.2 50.9-157.8z m-20-416.9c0-55.8-15.7-97.9-47-126.2-31.4-28.3-76.4-42.5-135-42.5-57.8 0-102.1 14.5-132.8 43.4-30.8 28.9-46.1 70.7-46.1 125.3 0 57.5 15.8 101.9 47.3 133.3s75.8 47.1 132.8 47.1c120.5-0.1 180.8-60.2 180.8-180.4z" p-id="1441" fill="#2c2c2c"></path></svg></button>
+					<button id="num9" @click="showNum9"><svg t="1585386994637" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1626" width="20" height="20"><path d="M756.5 492c0 151.9-24 267.5-71.9 346.7s-118.3 118.9-211 118.9c-56.6 0-103.1-13-139.6-38.8-36.5-25.9-61.7-63.5-75.6-112.8l55.9-15.4c20.9 78 74.6 117 161 117 73.3 0 128.2-33.1 164.7-99.4s55.9-167.1 58.4-302.6c-18.4 39.1-47 70.4-85.7 93.8s-81.8 35.2-129.3 35.2c-72.1 0-129.9-25.7-173.6-77-43.6-51.3-65.4-121-65.4-208.9 0-88.7 22.1-158.3 66.4-208.6 44.3-50.3 105.7-75.5 184.4-75.5 85.6 0 150.6 36 194.8 108.1s66.5 178.5 66.5 319.3z m-68-119.8c0-77.6-17.7-139.6-53.1-186s-82.4-69.6-140.9-69.6c-59.4 0-106 20-140 60s-51 97-51 170.9c0 73.5 16.7 131.4 50 173.7 33.4 42.3 79.7 63.4 139.1 63.4 59.8 0 107.3-19.2 142.8-57.6 35.3-38.3 53.1-89.9 53.1-154.8z" p-id="1627" fill="#2c2c2c"></path></svg></button>
+					<button id="num4" @click="showNum4"><svg t="1585387011099" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1812" width="20" height="20"><path d="M661.5 729.6v215h-58v-215h-394v-46.8L604.1 77.6h57.3v602h109v50H661.5z m-58-560l-332 510h332v-510z" p-id="1813" fill="#2c2c2c"></path></svg></button>
+					<button id="num5" @click="showNum5"><svg t="1585387024446" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1998" width="20" height="20"><path d="M762.5 667.4c0 92.8-22.8 164.4-68.3 214.8-45.5 50.3-109.9 75.5-193.2 75.5-67.3 0-121.3-14.9-162.1-44.7-40.8-29.8-68.6-77.3-83.4-142.6l59-11.7c13.1 53 34.4 91 63.9 113.8 29.5 22.8 70.9 34.2 124.2 34.2 65.2 0 114.8-20.4 148.8-61.3 34-40.9 51-99.1 51-174.7 0-65.3-17.6-117-52.9-155s-83.4-57-144.4-57c-30.7 0-59.3 4.9-85.8 14.6s-54.2 27.2-83.3 52.4h-54.7l28.9-448h414.1v53H362.7l-23.4 336c50-38.7 107.8-58 173.5-58 76.3 0 137 23.1 182.1 69.3 45 46.2 67.6 109.3 67.6 189.4z" p-id="1999" fill="#2c2c2c"></path></svg></button>
+					<button id="num6" @click="showNum6"><svg t="1585387032873" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2184" width="20" height="20"><path d="M253.5 531.5c0-311.2 93.7-466.8 281-466.8 57.8 0 103.6 12.4 137.4 37.2s57.7 62 71.6 111.6l-56 14.1c-21.8-75.3-74.7-113-158.8-113-70.6 0-124.4 34.5-161.5 103.4s-55.7 169.8-55.7 302.6c20.5-40.8 48.9-71.9 85.2-93.6s77.6-32.4 123.9-32.4c75.4 0 134.8 23.8 178 71.5 43.3 47.6 64.9 112.7 64.9 195.3 0 91.6-22.3 163.9-67 216.8-44.7 53-105.1 79.5-181.3 79.5-85.6 0-150.7-36.4-195.1-109.3-44.4-72.9-66.6-178.6-66.6-316.9z m67 108.8c0 77.3 17.7 141 53.1 191.1s82.2 75.2 140.4 75.2c59.8 0 106.5-21.5 140.1-64.4 33.6-42.9 50.4-101.6 50.4-176 0-71.9-17.2-127-51.6-165.2-34.4-38.2-82.3-57.3-143.8-57.3-33.6 0-64.9 8.1-94 24.4S363 507.4 346 537.4c-17 30-25.5 64.3-25.5 102.9z" p-id="2185" fill="#2c2c2c"></path></svg></button>
+					<button id="num1" @click="showNum1"><svg t="1585387054434" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2370" width="20" height="20"><path d="M266.5 944.6v-53h222v-747l-198 132v-57.3L496.8 77.6h48.7v814h190v53h-469z" p-id="2371" fill="#2c2c2c"></path></svg></button>
+					<button id="num2" @click="showNum2"><svg t="1585387065054" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2556" width="20" height="20"><path d="M245.5 944.6v-42.5C268 845.6 298 793 335.3 744.6c37.3-48.4 87.4-99.7 150.1-153.9 73.8-64 124.8-117 152.9-159.1 28.1-42 42.2-88.7 42.2-140 0-55-16-98-48-129.2s-75.7-46.8-131-46.8c-49.2 0-91.2 15.1-125.8 45.3s-54.7 71.4-60 123.7l-59.1-9.9c6.2-62.8 31.6-113.6 76.3-152.2s101.5-57.9 170.5-57.9c73.4 0 131.5 19.4 174.2 58.2 42.7 38.8 64 92.6 64 161.6 0 40.2-6.1 76.3-18.2 108.3s-31.9 64.8-59.4 98.5-72.4 78.4-134.7 134.2C478 671 434.4 715 398.5 757.4c-35.9 42.5-63.9 86.9-84 133.3h440v54h-509z" p-id="2557" fill="#2c2c2c"></path></svg></button>
+					<button id="num3" @click="showNum3"><svg t="1585387075892" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2742" width="20" height="20"><path d="M759.5 707c0 79.3-22.6 140.8-67.9 184.8-45.3 43.9-108.7 65.9-190.2 65.9-79.1 0-140.6-17.7-184.7-53.2-44-35.5-70.8-90.1-80.2-163.8l58.3-8c8.2 59.8 29.6 103.8 64.2 131.9s82 42.1 142.2 42.1c66.3 0 116-16.8 148.9-50.5s49.4-82.8 49.4-147.3c0-37-8.9-68.6-26.7-94.9-17.8-26.3-44.8-46.4-81-60.4s-78.1-21-125.5-21h-57.7v-57h55.8c41.7 0 79.2-7.6 112.5-22.8 33.3-15.2 58.3-36.1 74.8-62.6s24.8-57.7 24.8-93.5c0-58.4-15.8-103.4-47.5-134.8s-76.5-47.2-134.6-47.2c-55.6 0-99.5 14-131.8 42.1s-51.1 68.7-56.4 121.9l-57.6-5.5c7.8-67.4 33.2-119 76.4-154.8 43.2-35.8 100-53.7 170.3-53.7 76.5 0 135.8 20.2 178 60.7s63.2 96.4 63.2 167.8c0 51.7-15.9 96.4-47.5 134-31.7 37.6-73.5 61.9-125.5 73v2.5c60.6 7.8 108.4 30.2 143.5 67.1 34.9 36.8 52.5 82.6 52.5 137.2z" p-id="2743" fill="#2c2c2c"></path></svg></button>
+					<button id="num_" @click="showNum_"><svg t="1585475674674" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1151" width="20" height="20"><path d="M222.72 496l577.28 0 0 32-577.28 0 0-32Z" p-id="1152" fill="#2c2c2c"></path></svg></button>
+					<button id="num0" @click="showNum0"><svg t="1585387084506" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2928" width="20" height="20"><path d="M779.5 511.1c0 145.3-22.7 256.1-68 332.3C666.2 919.5 599 957.6 510 957.6s-155.8-37.8-200.5-113.3c-44.7-75.5-67-186.6-67-333.2 0-149.4 21.8-261.2 65.5-335.3S420.4 64.6 514.3 64.6c90.6 0 157.5 37.4 200.5 112.1s64.7 186.2 64.7 334.4z m-59-0.2c0-136.4-16.2-236.6-48.6-300.5-32.4-63.9-85.3-95.8-158.7-95.8-75.1 0-129.1 32.2-162.1 96.5s-49.5 164.3-49.5 299.8c0 132.3 16.9 231.3 50.8 297.1s86.9 98.6 159.1 98.6c139.2 0 209-131.9 209-395.7z" p-id="2929" fill="#2c2c2c"></path></svg></button>
+					<button id="num." @click="showNumDot"><svg t="1585387102336" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3114" width="20" height="20"><path d="M653.3 515.4c0 38.7-14 72-42.1 99.9s-61.4 41.9-100 41.9c-38.3 0-71.1-13.9-98.6-41.6-27.5-27.8-41.3-61.1-41.3-100.2 0-38.7 13.6-71.9 40.7-99.6s60.2-41.6 99.2-41.6c39.7 0 73.3 14 100.8 41.9 27.5 27.8 41.3 61 41.3 99.3z" p-id="3115" fill="#2c2c2c"></path></svg></button>
+				</div>
+				<div class="functionKey">
+					<button id="btnCle" @click="btnCle"><svg t="1585386816536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5094" width="25" height="25"><path d="M519.656727 472.459636l-160.512-160.488727a36.584727 36.584727 0 1 0-51.712 51.712l160.488728 160.512-160.488728 160.512a36.584727 36.584727 0 1 0 51.712 51.712l160.512-160.512 160.488728 160.512a36.584727 36.584727 0 1 0 51.735272-51.712l-160.512-160.512 160.512-160.512a36.584727 36.584727 0 1 0-51.735272-51.712L519.68 472.436364zM512 1024C229.236364 1024 0 794.763636 0 512S229.236364 0 512 0s512 229.236364 512 512-229.236364 512-512 512z" p-id="5095" fill="#13227a"></path></svg></button>
+					<button id="btnBac" @click="btnBac"><svg t="1585386853089" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5884" width="30" height="30"><path d="M859.306667 170.666667h-416.853334a128 128 0 0 0-85.333333 33.28l-4.266667 4.693333-256 319.146667a42.666667 42.666667 0 0 0 4.693334 58.453333l256 233.813333a128 128 0 0 0 85.333333 33.28h416.853333A78.506667 78.506667 0 0 0 938.666667 775.68V248.32A78.506667 78.506667 0 0 0 859.306667 170.666667z m-146.346667 396.373333a42.666667 42.666667 0 0 1 0 60.586667 42.666667 42.666667 0 0 1-60.586667 0L597.333333 572.16l-55.04 55.466667a42.666667 42.666667 0 0 1-60.586666 0 42.666667 42.666667 0 0 1 0-60.586667l55.466666-55.04-55.466666-55.04a42.666667 42.666667 0 0 1 60.586666-60.586667l55.04 55.466667 55.04-55.466667a42.666667 42.666667 0 0 1 60.586667 60.586667L657.493333 512z" p-id="5885" fill="#13227a"></path></svg></button>
+					<button id="btnMul" @click="btnMul"><svg t="1585386649319" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709" width="25" height="25"><path d="M706.574 234.574l-474 474c-23.432 23.431-23.432 61.42 0 84.852 23.431 23.432 61.42 23.432 84.852 0l474-474c23.432-23.431 23.432-61.42 0-84.852-23.431-23.432-61.42-23.432-84.852 0z" fill="#13227a" p-id="2710"></path><path d="M791.426 708.574l-474-474c-23.431-23.432-61.42-23.432-84.852 0-23.432 23.431-23.432 61.42 0 84.852l474 474c23.431 23.432 61.42 23.432 84.852 0 23.432-23.431 23.432-61.42 0-84.852z" fill="#13227a" p-id="2711"></path></svg></button>
+					<button id="btnDiv" @click="btnDiv"><svg t="1585386342483" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2263" width="25" height="25"><path d="M230.34 568.348a56.329 56.329 0 0 1-48.792-28.172 56.362 56.362 0 0 1 0-56.352 56.329 56.329 0 0 1 48.793-28.172h563.318a56.329 56.329 0 0 1 48.793 28.172 56.362 56.362 0 0 1 0 56.352 56.329 56.329 0 0 1-48.793 28.172H230.341zM512 357.043c-46.667 0-84.498-37.841-84.498-84.521S465.333 188 512 188s84.498 37.842 84.498 84.522c0 46.68-37.831 84.521-84.498 84.521zM512 836c-46.667 0-84.498-37.842-84.498-84.522 0-46.68 37.831-84.521 84.498-84.521s84.498 37.841 84.498 84.521S558.667 836 512 836z" fill="#13227a" p-id="2264"></path></svg></button>
+					<button id="btnAdd" @click="btnAdd"><svg t="1585386572475" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2246" width="20" height="20"><path d="M580.722174 437.990403 580.722174 78.171384 436.794158 78.171384 436.794158 437.990403 76.975139 437.990403 76.975139 581.918419 436.794158 581.918419 436.794158 941.737438 580.722174 941.737438 580.722174 581.918419 940.542216 581.918419 940.542216 437.990403Z" p-id="2247" fill="#13227a"></path></svg></button>
+					<button id="btnMin" @click="btnMin"><svg t="1585386686501" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3504" width="20" height="20"><path d="M117.734106 458.213254 906.212134 458.213254C925.995765 458.213254 959.972 482.279754 959.972 511.97312 959.972 541.666486 925.995765 565.732986 906.212134 565.732986L117.734106 565.732986C97.950475 565.732986 63.97424 541.666486 63.97424 511.97312 63.97424 482.279754 97.950475 458.213254 117.734106 458.213254Z" p-id="3505" fill="#13227a"></path></svg></button>
+					<button id="btnCal" @click="btnCal"><svg t="1585386930360" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6258" width="25" height="25"><path d="M223 406.5v-51.3h591v51.3H223z m0 302.8V658h591v51.3H223z" p-id="6259" fill="#13227a"></path></svg></button>
+				</div>
+			</div>
+		</div>	
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script>
+			var counter=new Vue({
+				el:'#outer',
+				data:{
+					inputMsg:'',
+					nextFunction:'',
+					result:'',
+					mainShow:'',
+					icon:''
+				},
+				methods:{
+					showNum7:function(){this.inputMsg+='7';this.mainChange()},
+					showNum8:function(){this.inputMsg+='8';this.mainChange()},
+					showNum9:function(){this.inputMsg+='9';this.mainChange()},
+					showNum4:function(){this.inputMsg+='4';this.mainChange()},
+					showNum5:function(){this.inputMsg+='5';this.mainChange()},
+					showNum6:function(){this.inputMsg+='6';this.mainChange()},
+					showNum1:function(){this.inputMsg+='1';this.mainChange()},
+					showNum2:function(){this.inputMsg+='2';this.mainChange()},
+					showNum3:function(){this.inputMsg+='3';this.mainChange()},
+					showNum_:function(){
+						if(this.inputMsg==''){this.inputMsg+='-';this.mainChange()
+						}else{
+							this.mainChange();
+						}
+					},	
+					showNum0:function(){this.inputMsg+='0';this.mainChange()},
+					showNumDot:function(){
+						if(this.inputMsg.lastIndexOf('.')==-1){
+							if(this.inputMsg==''){
+								this.inputMsg='0.';
+							}else{
+							this.inputMsg+='.'}
+						};
+						this.mainChange();
+					},
+					
+					Mul:function(x,y){
+						return parseFloat(x)*parseFloat(y)
+					},
+					Div:function(x,y){
+						return parseFloat(x)/parseFloat(y)
+					},
+					Add:function(x,y){
+						return parseFloat(x)+parseFloat(y)
+					},
+					Min:function(x,y){
+						return parseFloat(x)-parseFloat(y)
+					},
+					
+					btnMul:function(){
+						if(this.inputMsg==''){
+							if(this.result==''){
+								this.nextFunction='';
+							}else{
+								this.nextFunction='mul';
+							};
+						}else{
+							switch(this.nextFunction){
+								case '':this.result=this.inputMsg;break;
+								case 'mul' : this.result=this.Mul(this.result,this.inputMsg);break;
+								case 'div' : this.result=this.Div(this.result,this.inputMsg);break;
+								case 'add' : this.result=this.Add(this.result,this.inputMsg);break;
+								case 'min' : this.result=this.Min(this.result,this.inputMsg);break;
+							}
+						this.nextFunction='mul';
+						this.inputMsg='';
+						}
+						this.mainChange();
+					},
+					btnDiv:function(){
+						if(this.inputMsg==''){
+							if(this.result==''){
+								this.nextFunction='';
+							}else{
+								this.nextFunction='div';
+							};
+						}else{
+							switch(this.nextFunction){
+								case '':this.result=this.inputMsg;break;
+								case 'mul' : this.result=this.Mul(this.result,this.inputMsg);break;
+								case 'div' : this.result=this.Div(this.result,this.inputMsg);break;
+								case 'add' : this.result=this.Add(this.result,this.inputMsg);break;
+								case 'min' : this.result=this.Min(this.result,this.inputMsg);break;
+							}
+						this.nextFunction='div';
+						this.inputMsg='';
+						}
+						this.mainChange();
+					},
+					btnAdd:function(){
+						if(this.inputMsg==''){
+							if(this.result==''){
+								this.nextFunction='';
+							}else{
+								this.nextFunction='add';
+							};
+						}else{
+							switch(this.nextFunction){
+								case '':this.result=this.inputMsg;break;
+								case 'mul' : this.result=this.Mul(this.result,this.inputMsg);break;
+								case 'div' : this.result=this.Div(this.result,this.inputMsg);break;
+								case 'add' : this.result=this.Add(this.result,this.inputMsg);break;
+								case 'min' : this.result=this.Min(this.result,this.inputMsg);break;
+							}
+						this.nextFunction='add';
+						this.inputMsg='';
+						}
+						this.mainChange();
+					},
+					btnMin:function(){
+						if(this.inputMsg==''){
+							if(this.result==''){
+								this.nextFunction='';
+							}else{
+								this.nextFunction='min';
+							};
+						}else{
+							switch(this.nextFunction){
+								case '':this.result=this.inputMsg;break;
+								case 'mul' : this.result=this.Mul(this.result,this.inputMsg);break;
+								case 'div' : this.result=this.Div(this.result,this.inputMsg);break;
+								case 'add' : this.result=this.Add(this.result,this.inputMsg);break;
+								case 'min' : this.result=this.Min(this.result,this.inputMsg);break;
+							}
+						this.nextFunction='min';
+						this.inputMsg='';
+						}
+						this.mainChange();
+					},
+					btnCal:function(){
+						switch(this.nextFunction){
+							case '':if(this.inputMsg!=''){this.result=this.inputMsg;}else{this.result=this.result;}break;
+							case 'mul' : this.result=this.Mul(this.result,this.inputMsg);break;
+							case 'div' : this.result=this.Div(this.result,this.inputMsg);break;
+							case 'add' : this.result=this.Add(this.result,this.inputMsg);break;
+							case 'min' : this.result=this.Min(this.result,this.inputMsg);break;
+						}
+						
+						this.nextFunction='';
+						this.inputMsg='';
+						this.mainChange();
+					},
+					btnCle:function(){
+						this.inputMsg='',
+						this.nextFunction='',
+						this.result='',
+						this.mainShow=''
+					},
+					btnBac:function(){
+						this.inputMsg=this.inputMsg.slice(0,this.inputMsg.length-1);
+						this.mainChange();
+					},
+					
+					
+					mainChange:function(){
+						switch(this.nextFunction){
+							case '' : this.icon='';break;
+							case 'mul' : this.icon='*';break;
+							case 'div' : this.icon='/';break;
+							case 'add' : this.icon='+';break;
+							case 'min' : this.icon='-';break;
+						};
+						if(this.result==''){
+							this.icon='';
+						}else{
+						this.mainShow=`${this.result}${this.icon}${this.inputMsg}`;
+						}
+					},
+					
+				}
+			})
+		</script>
+	</body>
+</html>
