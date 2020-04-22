@@ -2,15 +2,16 @@
 			margin: 0;
 			padding: 0;
 			font-size: 40px;
+			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 		}
 		
 		#outer{
 			width:400px;
 			height:500px;
-			background-color: #36292f;
+			background-color: #020001;
 			margin:auto;
 			margin-top:100px;
-			border-radius: 5px;
+			border-radius: 30px;
 			color:#000000;
 			overflow: hidden;
 		}
@@ -24,9 +25,9 @@
 		#show .formula{
 			width:380px;
 			height:100px;
-			background-color: #e2e1e4;
-			transform: translateY(15px);
-			border-radius: 10px;
+			background-color: #ccccd6;
+			transform: translateY(12px);
+			border-radius: 15px;
 			overflow: hidden;
 			text-align: right;
 		}
@@ -39,8 +40,8 @@
 		#show .inAndOut .result{
 			width:187px;
 			height: 90px;
-			background-color: #d8e3e7;
-			border-radius: 10px;
+			background-color: #ccccd6;
+			border-radius: 15px;
 			margin-top:20px;
 			overflow: hidden;
 		}
@@ -50,7 +51,7 @@
 			height: 90px;
 			background-color: #ccccd6;
 			margin-top:20px;
-			border-radius: 10px;
+			border-radius: 15px;
 			overflow: hidden;
 			text-align: right;
 		}
@@ -60,16 +61,19 @@
 		#key{
 			width:380px;
 			height:270px;
-			background-color: #0eb0c9;
+			background-color: gray;
 			margin:auto;
 			display: flex;
 			justify-content: space-between;
+			border-radius: 30px;
 		}
 		
 		.numberKey{
 			width:230px;
 			height:270px;
-			background-color: #1ba784;
+			background-color: gray;
+			border-radius: 30px;
+
 		}
 		
 		.functionKey{
